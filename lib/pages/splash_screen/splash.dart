@@ -4,6 +4,8 @@ import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
 import 'package:pet_care/common/utils/image_string.dart';
 import 'package:pet_care/common/widgets/black_hole_clipper.dart';
+import 'package:pet_care/common/widgets/custom_page_transition.dart';
+import 'package:pet_care/pages/home_page/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -95,118 +97,141 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.colorPrimary,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(
-              flex: 2,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Spacer(
+            flex: 2,
+          ),
+          // headerPortion(context),
+          _headerWidget(context),
+          Spacer(),
+          _bodyWidget(),
+          Spacer(
+            flex: 2,
+          ),
+          _footerWidget(context),
+          Spacer(
+            flex: 2,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Opacity _footerWidget(BuildContext context) {
+    return Opacity(
+      opacity: opacity,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            showProgress = !showProgress;
+          });
+          Future.delayed(
+            Duration(seconds: 1),
+            () {
+              Navigator.of(context).push(
+                MyCustomAnimatedRoute(
+                  enterWidget: HomePage(),
+                ),
+              );
+              setState(() {
+                showProgress = !showProgress;
+              });
+            },
+          );
+        },
+        child: AnimatedCrossFade(
+            duration: Duration(milliseconds: 500),
+            crossFadeState: showProgress ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            firstChild: Text(
+              AppConst.splashBtnText.toUpperCase(),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
-            // headerPortion(context),
-            Opacity(
-              opacity: opacity,
-              child: Container(
-                margin: EdgeInsets.only(top: 50 * (1 - headerPoitionTween.value)),
-                child: Column(
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: AppConst.splashTitleText,
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: AppConst.splashSubTitleText,
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+            secondChild: SizedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.0,
                 ),
               ),
-            ),
-            Spacer(),
-            Container(
-              height: cardSize * 1.45,
-              child: Center(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ClipPath(
-                    clipper: BlackHoleClipper(),
-                    child: Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Positioned(
-                          bottom: 0,
-                          child: SizedBox(
-                            width: holeSize,
-                            child: Image.asset(
-                              ImagePath.hole,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Transform.translate(
-                          offset: Offset(0, cardOffset * 15),
-                          child: Transform.rotate(
-                            angle: cardRotation,
-                            child: Image.asset(
-                              ImagePath.logo,
-                              width: AppConstants.screenWidth * 0.8,
-                              height: AppConstants.screenWidth * 0.8,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ],
+              height: 20.0,
+              width: 20.0,
+            )),
+      ),
+    );
+  }
+
+  Container _bodyWidget() {
+    return Container(
+      height: cardSize * 1.45,
+      child: Center(
+        child: SizedBox(
+          width: double.infinity,
+          child: ClipPath(
+            clipper: BlackHoleClipper(),
+            child: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
+                    width: holeSize,
+                    child: Image.asset(
+                      ImagePath.hole,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            Opacity(
-              opacity: opacity,
-              child: ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    showProgress = !showProgress;
-                  });
-                },
-                child: AnimatedCrossFade(
-                    duration: Duration(milliseconds: 500),
-                    crossFadeState: showProgress ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                    firstChild: Text(
-                      AppConst.splashBtnText.toUpperCase(),
-                      style: Theme.of(context).textTheme.labelLarge,
+                Transform.translate(
+                  offset: Offset(0, cardOffset * 15),
+                  child: Transform.rotate(
+                    angle: cardRotation,
+                    child: Image.asset(
+                      ImagePath.logo,
+                      width: AppConstants.screenWidth * 0.8,
+                      height: AppConstants.screenWidth * 0.8,
+                      fit: BoxFit.cover,
                     ),
-                    secondChild: SizedBox(
-                      child: Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.0,
-                        ),
-                      ),
-                      height: 20.0,
-                      width: 20.0,
-                    )),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Opacity _headerWidget(BuildContext context) {
+    return Opacity(
+      opacity: opacity,
+      child: Container(
+        margin: EdgeInsets.only(top: 50 * (1 - headerPoitionTween.value)),
+        child: Column(
+          children: [
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: AppConst.splashTitleText,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ],
               ),
             ),
-            Spacer(
-              flex: 2,
+            SizedBox(
+              height: 10,
+            ),
+            Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: AppConst.splashSubTitleText,
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
