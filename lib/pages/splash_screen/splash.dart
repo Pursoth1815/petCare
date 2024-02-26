@@ -103,7 +103,6 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
           Spacer(
             flex: 2,
           ),
-          // headerPortion(context),
           _headerWidget(context),
           Spacer(),
           _bodyWidget(),
@@ -119,8 +118,9 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     );
   }
 
-  Opacity _footerWidget(BuildContext context) {
-    return Opacity(
+  AnimatedOpacity _footerWidget(BuildContext context) {
+    return AnimatedOpacity(
+      duration: Duration(milliseconds: 1500),
       opacity: opacity,
       child: ElevatedButton(
         onPressed: () {

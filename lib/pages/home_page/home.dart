@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care/common/utils/app_const.dart';
 import 'package:pet_care/common/utils/colors.dart';
+import 'package:pet_care/common/utils/constants.dart';
+import 'package:pet_care/common/utils/image_string.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -40,7 +43,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         setState(() {});
       });
 
-    animationToDecreasingCurve = Tween<double>(begin: 0, end: 500).animate(
+    animationToDecreasingCurve = Tween<double>(begin: 0, end: 1000).animate(
       CurvedAnimation(
         parent: controllerToDecreasingCurve,
         curve: Curves.fastLinearToSlowEaseIn,
@@ -72,8 +75,57 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(
           backPressed == false ? animationToIncreasingCurve.value : animationToDecreasingCurve.value,
         ),
-        child: const Scaffold(
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              AppConst.appName.toUpperCase(),
+              style: TextStyle(
+                wordSpacing: 8,
+                letterSpacing: 4,
+                fontSize: 18,
+              ),
+            ),
+            automaticallyImplyLeading: false,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: CircleAvatar(backgroundImage: AssetImage(ImagePath.user1)),
+              ),
+            ],
+          ),
           backgroundColor: AppColors.white,
+          body: Container(
+            width: AppConstants.screenWidth,
+            height: AppConstants.screenHeight,
+            margin: EdgeInsets.only(top: 20),
+            decoration: BoxDecoration(
+              color: AppColors.whiteLite,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(75),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        AppConst.searchForPet,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
