@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:pet_care/common/utils/app_const.dart';
 import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
 import 'package:pet_care/common/utils/image_string.dart';
+import 'package:pet_care/common/widgets/black_hole_clipper.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -15,6 +14,7 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> with TickerProviderStateMixin {
   final cardSize = 150.0;
+  bool showProgress = false;
 
   /****************** TWEEN ************************/
 
@@ -33,6 +33,13 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     end: 0,
   ).chain(CurveTween(curve: Curves.easeInOutBack));
 
+  late final opacityTween = Tween<double>(
+    begin: 0,
+    end: 1,
+  ).chain(CurveTween(curve: Curves.easeInOut));
+
+  late final headerPoitionTween = CurvedAnimation(parent: opacityAnimationController, curve: Curves.linear);
+
   /****************** CONTROLLER ************************/
 
   late final holeAnimationController = AnimationController(
@@ -45,28 +52,43 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     duration: const Duration(milliseconds: 1500),
   );
 
+  late final opacityAnimationController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1000),
+  );
+
+  /****************** CONTROLLER ************************/
+
   double get holeSize => holeSizeTween.evaluate(holeAnimationController);
   double get cardRotation => cardRotationTween.evaluate(cardOffsetAnimationController);
   double get cardOffset => cardOffsetTween.evaluate(cardOffsetAnimationController);
+  double get opacity => opacityTween.evaluate(opacityAnimationController);
 
   @override
   void initState() {
-    initAnimation();
+    startAnimation();
     holeAnimationController.addListener(() => setState(() {}));
-    cardOffsetAnimationController.addListener(() => setState(() {}));
+    cardOffsetAnimationController.addListener(() => setState(() {
+          if (cardOffset < 4) {
+            opacityAnimationController.forward();
+          }
+        }));
+    opacityAnimationController.addListener(() => setState(() {}));
     super.initState();
   }
 
   @override
   void dispose() {
     holeAnimationController.dispose();
+    cardOffsetAnimationController.dispose();
+    opacityAnimationController.dispose();
     super.dispose();
   }
 
-  Future<void> initAnimation() async {
+  Future<void> startAnimation() async {
     holeAnimationController.forward();
     await cardOffsetAnimationController.forward();
-    Future.delayed(const Duration(milliseconds: 300), () => holeAnimationController.reverse());
+    holeAnimationController.reverse();
   }
 
   @override
@@ -77,29 +99,41 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Spacer(),
-            Spacer(),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: AppConst.splashTitleText,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ],
-              ),
+            Spacer(
+              flex: 2,
             ),
-            SizedBox(
-              height: 25,
-            ),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: AppConst.splashSubTitleText,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
+            // headerPortion(context),
+            Opacity(
+              opacity: opacity,
+              child: Container(
+                margin: EdgeInsets.only(top: 50 * (1 - headerPoitionTween.value)),
+                child: Column(
+                  children: [
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppConst.splashTitleText,
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: AppConst.splashSubTitleText,
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Spacer(),
@@ -129,6 +163,8 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                             angle: cardRotation,
                             child: Image.asset(
                               ImagePath.logo,
+                              width: AppConstants.screenWidth * 0.8,
+                              height: AppConstants.screenWidth * 0.8,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -139,47 +175,42 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            Spacer(),
-            Spacer(),
-            ElevatedButton(
-              onPressed: () {
-                print("hii");
-              },
-              child: Text(
-                AppConst.splashBtnText.toUpperCase(),
-                style: Theme.of(context).textTheme.labelLarge,
+            Spacer(
+              flex: 2,
+            ),
+            Opacity(
+              opacity: opacity,
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    showProgress = !showProgress;
+                  });
+                },
+                child: AnimatedCrossFade(
+                    duration: Duration(milliseconds: 500),
+                    crossFadeState: showProgress ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                    firstChild: Text(
+                      AppConst.splashBtnText.toUpperCase(),
+                      style: Theme.of(context).textTheme.labelLarge,
+                    ),
+                    secondChild: SizedBox(
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.0,
+                        ),
+                      ),
+                      height: 20.0,
+                      width: 20.0,
+                    )),
               ),
             ),
-            Spacer(),
+            Spacer(
+              flex: 2,
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-class BlackHoleClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.moveTo(0, size.height / 2);
-    path.arcTo(
-      Rect.fromCenter(
-        center: Offset(size.width / 2, size.height / 2),
-        width: size.width,
-        height: size.height,
-      ),
-      0,
-      pi,
-      true,
-    );
-    // Using -1000 guarantees the card won't be clipped at the top, regardless of its height
-    path.lineTo(0, -1000);
-    path.lineTo(size.width, -1000);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(BlackHoleClipper oldClipper) => false;
 }
