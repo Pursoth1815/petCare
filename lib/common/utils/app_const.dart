@@ -10,4 +10,6 @@ class AppConst {
   static const String splashSubTitleText = "Adopt Don't Shop";
 
   static const String searchForPet = "Search For a Pet";
+
+  static const String search = "search...";
 }

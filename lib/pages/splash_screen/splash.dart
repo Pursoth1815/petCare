@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_care/common/utils/app_const.dart';
 import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
@@ -6,6 +7,7 @@ import 'package:pet_care/common/utils/image_string.dart';
 import 'package:pet_care/common/widgets/black_hole_clipper.dart';
 import 'package:pet_care/common/widgets/custom_page_transition.dart';
 import 'package:pet_care/pages/home_page/home.dart';
+import 'package:pet_care/pages/splash_screen/bloc/splash_bloc.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -16,7 +18,6 @@ class Splash extends StatefulWidget {
 
 class _SplashState extends State<Splash> with TickerProviderStateMixin {
   final cardSize = 150.0;
-  bool showProgress = false;
 
   /****************** TWEEN ************************/
 
@@ -93,57 +94,60 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     holeAnimationController.reverse();
   }
 
+  final SplashBloc homeBloc = SplashBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.colorPrimary,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Spacer(
-            flex: 2,
-          ),
-          _headerWidget(context),
-          Spacer(),
-          _bodyWidget(),
-          Spacer(
-            flex: 2,
-          ),
-          _footerWidget(context),
-          Spacer(
-            flex: 2,
-          ),
-        ],
+      body: BlocConsumer<SplashBloc, SplashState>(
+        bloc: homeBloc,
+        listenWhen: (previous, current) => current is SplashActionState,
+        buildWhen: (previous, current) => current is! SplashActionState,
+        listener: (context, state) {
+          if (state is HomeScreenNavigation) {
+            Navigator.of(context).push(
+              MyCustomAnimatedRoute(
+                route: HomePage(),
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(
+                flex: 2,
+              ),
+              _headerWidget(context),
+              Spacer(),
+              _bodyWidget(),
+              Spacer(
+                flex: 2,
+              ),
+              _footerWidget(context, state),
+              Spacer(
+                flex: 2,
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  AnimatedOpacity _footerWidget(BuildContext context) {
+  AnimatedOpacity _footerWidget(BuildContext context, SplashState state) {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 1500),
       opacity: opacity,
       child: ElevatedButton(
         onPressed: () {
-          setState(() {
-            showProgress = !showProgress;
-          });
-          Future.delayed(
-            Duration(seconds: 1),
-            () {
-              Navigator.of(context).push(
-                MyCustomAnimatedRoute(
-                  enterWidget: HomePage(),
-                ),
-              );
-              setState(() {
-                showProgress = !showProgress;
-              });
-            },
-          );
+          homeBloc.add(NavigateToHomeScreen());
         },
         child: AnimatedCrossFade(
             duration: Duration(milliseconds: 500),
-            crossFadeState: showProgress ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            crossFadeState: state is loadinBtnState ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             firstChild: Text(
               AppConst.splashBtnText.toUpperCase(),
               style: Theme.of(context).textTheme.labelLarge,

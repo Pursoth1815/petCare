@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyCustomAnimatedRoute extends PageRouteBuilder {
-  final Widget enterWidget;
+  final Widget route;
 
-  MyCustomAnimatedRoute({required this.enterWidget})
+  MyCustomAnimatedRoute({required this.route})
       : super(
           opaque: false,
-          pageBuilder: (context, animation, secondaryAnimation) => enterWidget,
+          pageBuilder: (context, animation, secondaryAnimation) => route,
           transitionDuration: Duration(milliseconds: 1500),
           reverseTransitionDuration: Duration(milliseconds: 500),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
