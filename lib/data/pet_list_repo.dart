@@ -1,6 +1,28 @@
 import 'package:pet_care/common/utils/image_string.dart';
+import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
 
 class PetListRepo {
+  PetListRepo._privateConstructor();
+  static final PetListRepo _instance = PetListRepo._privateConstructor();
+
+  factory PetListRepo() {
+    return _instance;
+  }
+
+  List<String> _petFavoriteLists = [];
+
+  List<String> get petFavoriteLists => _petFavoriteLists;
+
+  void toggleFavorite(PetDetailsModel item) {
+    if (_petFavoriteLists.contains(item.id)) {
+      _petFavoriteLists.remove(item.id);
+      item.favorite = false;
+    } else {
+      _petFavoriteLists.add(item.id);
+      item.favorite = true;
+    }
+  }
+
   static List<Map<String, dynamic>> petDetailsList = [
     {
       'id': '1',

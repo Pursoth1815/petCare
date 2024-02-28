@@ -29,7 +29,7 @@ class Pet_Details_Tile extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: AppColors.white,
+                color: Colors.white70,
                 borderRadius: BorderRadius.all(
                   Radius.circular(30),
                 ),
@@ -43,9 +43,12 @@ class Pet_Details_Tile extends StatelessWidget {
                     height: AppConstants.screenHeight,
                     child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Image.asset(
-                        petList.petImageUrl,
-                        fit: BoxFit.cover, // Ensure the image covers the entire area
+                      child: Hero(
+                        tag: petList.id,
+                        child: Image.asset(
+                          petList.petImageUrl,
+                          fit: BoxFit.cover, // Ensure the image covers the entire area
+                        ),
                       ),
                     ),
                   ),

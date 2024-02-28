@@ -1,6 +1,8 @@
 import 'package:pet_care/common/utils/image_string.dart';
 
 class PetCategoryRepo {
+  PetCategoryRepo._();
+
   static List<Map<String, dynamic>> petCategoryList = [
     {
       'id': '1',

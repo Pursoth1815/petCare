@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   late AnimationController controllerToIncreasingCurve = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 2),
+    duration: Duration(seconds: 1),
   );
 
   late AnimationController controllerToDecreasingCurve = AnimationController(

@@ -18,9 +18,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
   FutureOr<void> fetchLists(HomeInitialEvent event, Emitter<HomeState> emit) async {
     //List Fetched Through Here
+    PetListRepo repo = PetListRepo();
+
     List<PetListModel> categoryList = PetCategoryRepo.petCategoryList.map((e) => PetListModel.fromMap(e)).toList();
 
     List<PetDetailsModel> petDetails = PetListRepo.petDetailsList.map((e) => PetDetailsModel.fromMap(e)).toList();
+
+    petDetails.forEach((item) {
+      if (repo.petFavoriteLists.contains(item.id)) {
+        item.favorite = true;
+      }
+    });
 
     emit(ListLoddedSuccessState(categoryList: categoryList, petList: petDetails));
   }
@@ -38,12 +46,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   FutureOr<void> updatePetFavoriteList(PetFavoriteItemAddEvent event, Emitter<HomeState> emit) async {
+    PetListRepo repo = PetListRepo();
+
     final updatedList = (state as ListLoddedSuccessState).petList.map((item) {
       if (item.id == event.favoriteItem.id) {
-        return item.copyWith(favorite: true);
-      } else {
-        return item.copyWith(favorite: false);
+        repo.toggleFavorite(item);
       }
+      return item;
     }).toList();
 
     emit(ListLoddedSuccessState(categoryList: (state as ListLoddedSuccessState).categoryList, petList: updatedList));
