@@ -22,12 +22,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   late AnimationController controllerToIncreasingCurve = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 1),
+    duration: Duration(microseconds: 1000),
   );
 
   late AnimationController controllerToDecreasingCurve = AnimationController(
     vsync: this,
-    duration: Duration(seconds: 1),
+    duration: Duration(microseconds: 800),
   );
 
   late Animation<double> animationToIncreasingCurve = Tween<double>(begin: 1000, end: 0).animate(
@@ -177,6 +177,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   AppBar _homeAppbar() {
     return AppBar(
+      backgroundColor: AppColors.white,
       centerTitle: true,
       title: Text(
         AppConst.appName.toUpperCase(),

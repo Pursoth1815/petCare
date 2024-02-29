@@ -19,7 +19,7 @@ class Pet_Details_Tile extends StatelessWidget {
       alignment: Alignment.topCenter,
       children: [
         SizedBox(
-          height: 130,
+          height: AppConstants.screenWidth * 0.35,
           child: Card(
             elevation: 8,
             shape: RoundedRectangleBorder(
@@ -93,16 +93,19 @@ class Pet_Details_Tile extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 15,
-          right: 20,
-          child: GestureDetector(
+          top: 10,
+          right: 15,
+          child: InkWell(
             onTap: () {
               bloc.add(PetFavoriteItemAddEvent(favoriteItem: petList));
             },
-            child: Icon(
-              petList.favorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
-              color: Colors.red,
-              size: 16,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                petList.favorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                color: Colors.red,
+                size: 18,
+              ),
             ),
           ),
         )

@@ -17,13 +17,11 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> with TickerProviderStateMixin {
-  final cardSize = 150.0;
-
   /****************** TWEEN ************************/
 
   late final holeSizeTween = Tween<double>(
     begin: 0,
-    end: 1.5 * cardSize,
+    end: 1.5 * AppConstants.screenWidth * 0.65,
   );
 
   late final cardRotationTween = Tween<double>(
@@ -166,42 +164,37 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
     );
   }
 
-  Container _bodyWidget() {
-    return Container(
-      height: cardSize * 1.45,
-      child: Center(
-        child: SizedBox(
-          width: double.infinity,
-          child: ClipPath(
-            clipper: BlackHoleClipper(),
-            child: Stack(
-              alignment: Alignment.topCenter,
-              children: [
-                Positioned(
-                  bottom: 0,
-                  child: SizedBox(
-                    width: holeSize,
-                    child: Image.asset(
-                      ImagePath.hole,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+  Widget _bodyWidget() {
+    return Center(
+      child: ClipPath(
+        clipper: BlackHoleClipper(),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            Positioned(
+              bottom: 0,
+              child: SizedBox(
+                width: holeSize,
+                child: Image.asset(
+                  ImagePath.hole,
+                  height: holeSize / 6.5,
+                  fit: BoxFit.cover,
                 ),
-                Transform.translate(
-                  offset: Offset(0, cardOffset * 15),
-                  child: Transform.rotate(
-                    angle: cardRotation,
-                    child: Image.asset(
-                      ImagePath.logo,
-                      width: AppConstants.screenWidth * 0.8,
-                      height: AppConstants.screenWidth * 0.8,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+            Transform.translate(
+              offset: Offset(0, cardOffset * 15),
+              child: Transform.rotate(
+                angle: cardRotation,
+                child: Image.asset(
+                  ImagePath.logo,
+                  width: AppConstants.screenWidth * 0.8,
+                  height: AppConstants.screenWidth * 0.6,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -9,8 +9,8 @@ class BlackHoleClipper extends CustomClipper<Path> {
     path.arcTo(
       Rect.fromCenter(
         center: Offset(size.width / 2, size.height / 2),
-        width: size.width,
-        height: size.height,
+        width: size.width * 1.06,
+        height: size.height * 1.06,
       ),
       0,
       pi,

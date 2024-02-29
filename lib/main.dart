@@ -28,6 +28,12 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lighThemeData,
         home: Splash(),
+        builder: (context, child) {
+          return MediaQuery(
+            child: child!,
+            data: MediaQuery.of(context).copyWith(textScaler: TextScaler.linear(1.0)),
+          );
+        },
       ),
     );
   }
