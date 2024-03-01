@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -11,10 +13,20 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  //local list
+
+  List<PetDetailsModel> _petList = [];
+  List<PetListModel> _categoryList = [];
+
   HomeBloc() : super(HomeInitial()) {
     on<HomeInitialEvent>(fetchLists);
     on<CategoryClickEvent>(updateCategoryList);
     on<PetFavoriteItemAddEvent>(updatePetFavoriteList);
+    on<GoToDetailsEvent>(
+      (event, emit) {
+        emit(GoToDetailsState(petList: event.selectedItem));
+      },
+    );
   }
   FutureOr<void> fetchLists(HomeInitialEvent event, Emitter<HomeState> emit) async {
     //List Fetched Through Here
@@ -30,11 +42,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     });
 
+    _petList = petDetails;
+    _categoryList = categoryList;
+
     emit(ListLoddedSuccessState(categoryList: categoryList, petList: petDetails));
   }
 
   FutureOr<void> updateCategoryList(CategoryClickEvent event, Emitter<HomeState> emit) async {
-    final updatedList = (state as ListLoddedSuccessState).categoryList.map((item) {
+    final updatedList = _categoryList.map((item) {
       if (item.id == event.selectedCategory.id) {
         return item.copyWith(selected: true);
       } else {
@@ -42,19 +57,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       }
     }).toList();
 
-    emit(ListLoddedSuccessState(categoryList: updatedList, petList: (state as ListLoddedSuccessState).petList));
+    _categoryList = updatedList;
+
+    emit(ListLoddedSuccessState(categoryList: updatedList, petList: _petList));
   }
 
   FutureOr<void> updatePetFavoriteList(PetFavoriteItemAddEvent event, Emitter<HomeState> emit) async {
     PetListRepo repo = PetListRepo();
 
-    final updatedList = (state as ListLoddedSuccessState).petList.map((item) {
+    final updatedList = _petList.map((item) {
       if (item.id == event.favoriteItem.id) {
         repo.toggleFavorite(item);
       }
       return item;
     }).toList();
 
-    emit(ListLoddedSuccessState(categoryList: (state as ListLoddedSuccessState).categoryList, petList: updatedList));
+    emit(ListLoddedSuccessState(categoryList: _categoryList, petList: updatedList));
   }
 }

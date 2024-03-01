@@ -14,3 +14,8 @@ class PetFavoriteItemAddEvent extends HomeEvent {
   final PetDetailsModel favoriteItem;
   PetFavoriteItemAddEvent({required this.favoriteItem});
 }
+
+class GoToDetailsEvent extends HomeEvent {
+  final PetDetailsModel selectedItem;
+  GoToDetailsEvent({required this.selectedItem});
+}

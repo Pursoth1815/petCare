@@ -18,76 +18,87 @@ class Pet_Details_Tile extends StatelessWidget {
     return Stack(
       alignment: Alignment.topCenter,
       children: [
-        SizedBox(
-          height: AppConstants.screenWidth * 0.35,
-          child: Card(
-            elevation: 8,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(30),
-              ),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white70,
+        GestureDetector(
+          onTap: () {
+            bloc.add(GoToDetailsEvent(selectedItem: petList));
+          },
+          child: SizedBox(
+            height: AppConstants.screenWidth * 0.35,
+            child: Card(
+              elevation: 8,
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(
                   Radius.circular(30),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Container(
-                    width: AppConstants.screenWidth * 0.33,
-                    height: AppConstants.screenHeight,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      child: Hero(
-                        tag: petList.id,
-                        child: Image.asset(
-                          petList.petImageUrl,
-                          fit: BoxFit.cover, // Ensure the image covers the entire area
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white70,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(30),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Hero(
+                      tag: petList.petImageUrl,
+                      child: Container(
+                        width: AppConstants.screenWidth * 0.33,
+                        height: AppConstants.screenHeight,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
+                          child: Image.asset(
+                            petList.petImageUrl,
+                            fit: BoxFit.cover, // Ensure the image covers the entire area
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      margin: EdgeInsets.only(top: 18, left: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            petList.petname,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textColor,
-                            ),
+                    Expanded(
+                      child: Hero(
+                        tag: petList.id,
+                        child: Container(
+                          margin: EdgeInsets.only(top: 18, left: 15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                petList.petname,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.textColor,
+                                ),
+                              ),
+                              Text(
+                                petList.petDesc,
+                                style: TextStyle(
+                                  decoration: TextDecoration.none,
+                                  fontSize: 11,
+                                  color: Colors.black38,
+                                ),
+                              ),
+                              Spacer(),
+                              Text(
+                                "₹ ${petList.amount}",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  decoration: TextDecoration.none,
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.textColor,
+                                ),
+                              ),
+                              Spacer()
+                            ],
                           ),
-                          Text(
-                            petList.petDesc,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: Colors.black38,
-                            ),
-                          ),
-                          Spacer(),
-                          Text(
-                            "₹ ${petList.amount}",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.textColor,
-                            ),
-                          ),
-                          Spacer()
-                        ],
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,7 +106,7 @@ class Pet_Details_Tile extends StatelessWidget {
         Positioned(
           top: 10,
           right: 15,
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               bloc.add(PetFavoriteItemAddEvent(favoriteItem: petList));
             },

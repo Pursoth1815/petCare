@@ -4,6 +4,7 @@ import 'package:pet_care/common/utils/app_const.dart';
 import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
 import 'package:pet_care/common/utils/image_string.dart';
+import 'package:pet_care/pages/details_page/details.dart';
 import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
 import 'package:pet_care/pages/details_page/models/pet_list_model.dart';
 import 'package:pet_care/pages/home_page/UI/pet_details_tile.dart';
@@ -95,7 +96,24 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             bloc: homeBlock,
             listenWhen: (previous, current) => current is HomeActionState,
             buildWhen: (previous, current) => current is! HomeActionState,
-            listener: (context, state) {},
+            listener: (context, state) {
+              print(state);
+              if (state is GoToDetailsState) {
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration(milliseconds: 1000),
+                    reverseTransitionDuration: Duration(milliseconds: 1000),
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: PetDetails(petLists: state.petList),
+                      );
+                    },
+                  ),
+                );
+              }
+            },
             builder: (context, state) {
               List<PetListModel> categoryLists = [];
               List<PetDetailsModel> petDetailsLists = [];
@@ -116,7 +134,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
+                  padding: EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -145,7 +163,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         itemBuilder: (context, index) {
           PetDetailsModel item = petDetailsLists[index];
           return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
+            padding: EdgeInsets.symmetric(vertical: 10),
             child: Pet_Details_Tile(
               bloc: homeBlock,
               petList: item,

@@ -13,4 +13,7 @@ final class ListLoddedSuccessState extends HomeState {
   ListLoddedSuccessState({required this.categoryList, required this.petList});
 }
 
-final class GoToDetailsState extends HomeActionState {}
+final class GoToDetailsState extends HomeActionState {
+  final PetDetailsModel petList;
+  GoToDetailsState({required this.petList});
+}
