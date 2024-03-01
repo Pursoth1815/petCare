@@ -34,14 +34,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late Animation<double> animationToIncreasingCurve = Tween<double>(begin: 1000, end: 0).animate(
     CurvedAnimation(
       parent: controllerToIncreasingCurve,
-      curve: Curves.fastLinearToSlowEaseIn,
+      curve: Curves.fastOutSlowIn,
     ),
   );
 
   late Animation<double> animationToDecreasingCurve = Tween<double>(begin: 0, end: 1000).animate(
     CurvedAnimation(
       parent: controllerToDecreasingCurve,
-      curve: Curves.fastLinearToSlowEaseIn,
+      curve: Curves.fastOutSlowIn,
     ),
   );
 

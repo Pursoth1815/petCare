@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
-import 'package:pet_care/common/utils/image_string.dart';
 import 'package:pet_care/pages/details_page/UI/details_tile.dart';
 import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
-import 'package:pet_care/pages/home_page/bloc/home_bloc.dart';
 
 class PetDetails extends StatefulWidget {
   final PetDetailsModel petLists;
@@ -35,11 +33,24 @@ class _PetDetailsState extends State<PetDetails> {
               child: Image.asset(
                 list.petImageUrl,
                 width: AppConstants.screenWidth,
-                height: AppConstants.screenHeight * 0.5,
+                height: AppConstants.screenHeight * 0.6,
                 fit: BoxFit.cover,
               ),
             ),
           ),
+          Positioned(
+              bottom: 0,
+              child: Container(
+                width: AppConstants.screenWidth,
+                height: AppConstants.screenHeight * 0.5,
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(45),
+                  ),
+                ),
+                child: Center(child: Text("Data....")),
+              )),
           Hero(
             tag: list.id,
             child: Details_Tile(petList: list),

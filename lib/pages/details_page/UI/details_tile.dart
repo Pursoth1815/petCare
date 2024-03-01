@@ -20,7 +20,7 @@ class Details_Tile extends StatelessWidget {
           width: AppConstants.screenWidth * 0.80,
           height: AppConstants.screenWidth * 0.35,
           child: Card(
-            elevation: 8,
+            elevation: 10,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(
                 Radius.circular(35),
@@ -34,20 +34,20 @@ class Details_Tile extends StatelessWidget {
                 ),
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(top: 18, left: 15),
+                      padding: EdgeInsets.only(top: 30, left: 20),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             petList.petname,
                             style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
                               color: AppColors.textColor,
                             ),
                           ),
@@ -66,6 +66,7 @@ class Details_Tile extends StatelessWidget {
                   Container(
                     width: AppConstants.screenWidth * 0.25,
                     height: AppConstants.screenHeight,
+                    margin: EdgeInsets.only(right: 15),
                     alignment: Alignment.center,
                     child: Center(
                       child: Text(

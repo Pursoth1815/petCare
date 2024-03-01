@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
 
   late final holeSizeTween = Tween<double>(
     begin: 0,
-    end: 1.5 * AppConstants.screenWidth * 0.65,
+    end: 1.5 * AppConstants.screenWidth * 0.60,
   );
 
   late final cardRotationTween = Tween<double>(
@@ -45,7 +45,7 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
 
   late final holeAnimationController = AnimationController(
     vsync: this,
-    duration: const Duration(milliseconds: 600),
+    duration: const Duration(milliseconds: 500),
   );
 
   late final cardOffsetAnimationController = AnimationController(
@@ -177,13 +177,13 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
                 width: holeSize,
                 child: Image.asset(
                   ImagePath.hole,
-                  height: holeSize / 6.5,
+                  height: holeSize / 6.0,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Transform.translate(
-              offset: Offset(0, cardOffset * 15),
+              offset: Offset(0, cardOffset * 25),
               child: Transform.rotate(
                 angle: cardRotation,
                 child: Image.asset(
