@@ -7,6 +7,10 @@ class PetDetailsModel {
   final String ownername;
   final String ownerDesc;
   final String ownerImgUrl;
+  final String age;
+  final String sex;
+  final String color;
+  final String length;
   bool favorite;
 
   PetDetailsModel({
@@ -18,6 +22,10 @@ class PetDetailsModel {
     required this.ownername,
     required this.ownerDesc,
     required this.ownerImgUrl,
+    required this.age,
+    required this.sex,
+    required this.color,
+    required this.length,
     this.favorite = false,
   });
 
@@ -31,6 +39,10 @@ class PetDetailsModel {
       ownername: json['ownername'],
       ownerDesc: json['ownerDesc'],
       ownerImgUrl: json['ownerImgUrl'],
+      age: json['age'],
+      sex: json['sex'],
+      color: json['color'],
+      length: json['length'],
     );
   }
 
@@ -44,6 +56,10 @@ class PetDetailsModel {
       'ownername': ownername,
       'ownerDesc': ownerDesc,
       'ownerImgUrl': ownerImgUrl,
+      'age': age,
+      'sex': sex,
+      'color': color,
+      'length': length,
       'fav': favorite,
     };
   }
@@ -58,6 +74,10 @@ class PetDetailsModel {
       ownername: map['ownername'],
       ownerDesc: map['ownerDesc'],
       ownerImgUrl: map['ownerImgUrl'],
+      age: map['age'],
+      sex: map['sex'],
+      color: map['color'],
+      length: map['length'],
     );
   }
 
@@ -70,6 +90,10 @@ class PetDetailsModel {
     String? ownername,
     String? ownerDesc,
     String? ownerImgUrl,
+    String? age,
+    String? sex,
+    String? color,
+    String? length,
     bool? favorite,
   }) {
     return PetDetailsModel(
@@ -81,6 +105,10 @@ class PetDetailsModel {
       ownername: ownername ?? this.ownername,
       ownerDesc: ownerDesc ?? this.ownerDesc,
       ownerImgUrl: ownerImgUrl ?? this.ownerImgUrl,
+      age: age ?? this.age,
+      sex: sex ?? this.sex,
+      color: color ?? this.color,
+      length: length ?? this.length,
       favorite: favorite ?? this.favorite,
     );
   }

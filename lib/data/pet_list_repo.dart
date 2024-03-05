@@ -33,6 +33,10 @@ class PetListRepo {
       'ownername': 'Kaviyaa',
       'ownerDesc': 'Vix eu dico possit, vim te inani fabulas insolens, in',
       'ownerImgUrl': ImagePath.user3,
+      'age': '3',
+      'sex': 'Male',
+      'color': 'Brown',
+      'length': '2.3'
     },
     {
       'id': '2',
@@ -41,8 +45,13 @@ class PetListRepo {
       'amount': '12000',
       'petImageUrl': ImagePath.dog4,
       'ownername': 'Pursoth',
-      'ownerDesc': ' pri et falli detracto. Has iriure labitur eu',
+      'ownerDesc':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       'ownerImgUrl': ImagePath.user4,
+      'age': '3',
+      'sex': 'Female',
+      'color': 'Gold',
+      'length': '2.0'
     },
     {
       'id': '3',
@@ -53,6 +62,10 @@ class PetListRepo {
       'ownername': 'Vikram',
       'ownerDesc': 'At regione conclusionemque his, ius cu corrumpit',
       'ownerImgUrl': ImagePath.user2,
+      'age': '5',
+      'sex': 'Male',
+      'color': 'Black',
+      'length': '5.5'
     },
     {
       'id': '4',
@@ -63,6 +76,10 @@ class PetListRepo {
       'ownername': 'Rambo',
       'ownerDesc': 'ei, cu mea dictas evertitur intellegebat pri.',
       'ownerImgUrl': ImagePath.user1,
+      'age': '2',
+      'sex': 'Female',
+      'color': 'Blue',
+      'length': '1.5'
     },
   ];
 }

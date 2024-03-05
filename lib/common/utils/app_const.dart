@@ -12,4 +12,8 @@ class AppConst {
   static const String searchForPet = "Search For a Pet";
 
   static const String search = "search...";
+
+  static const String adoption = "Adoption";
+
+  static const String owner = "Owner";
 }

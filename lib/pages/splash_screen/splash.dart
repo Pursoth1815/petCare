@@ -144,22 +144,23 @@ class _SplashState extends State<Splash> with TickerProviderStateMixin {
           homeBloc.add(NavigateToHomeScreen());
         },
         child: AnimatedCrossFade(
-            duration: Duration(milliseconds: 500),
-            crossFadeState: state is loadinBtnState ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-            firstChild: Text(
-              AppConst.splashBtnText.toUpperCase(),
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            secondChild: SizedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.0,
-                ),
+          duration: Duration(milliseconds: 500),
+          crossFadeState: state is loadinBtnState ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+          firstChild: Text(
+            AppConst.splashBtnText.toUpperCase(),
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+          secondChild: SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: CircularProgressIndicator(
+                strokeWidth: 2.0,
               ),
-              height: 20.0,
-              width: 20.0,
-            )),
+            ),
+            height: 20.0,
+            width: 20.0,
+          ),
+        ),
       ),
     );
   }

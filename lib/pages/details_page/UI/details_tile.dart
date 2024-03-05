@@ -28,7 +28,7 @@ class Details_Tile extends StatelessWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white70,
+                color: Colors.white,
                 borderRadius: BorderRadius.all(
                   Radius.circular(35),
                 ),
