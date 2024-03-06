@@ -40,60 +40,55 @@ class Pet_Details_Tile extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Hero(
                       tag: petList.petImageUrl,
                       child: Container(
                         width: AppConstants.screenWidth * 0.33,
-                        height: AppConstants.screenHeight,
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(30)),
                           child: Image.asset(
                             petList.petImageUrl,
-                            fit: BoxFit.cover, // Ensure the image covers the entire area
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
                     Expanded(
-                      child: Hero(
-                        tag: petList.id,
-                        child: Container(
-                          margin: EdgeInsets.only(top: 18, left: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                petList.petname,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  decoration: TextDecoration.none,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textColor,
-                                ),
+                      child: Container(
+                        margin: EdgeInsets.only(top: 18, left: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              petList.petname,
+                              style: TextStyle(
+                                fontSize: 18,
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textColor,
                               ),
-                              Text(
-                                petList.petDesc,
-                                style: TextStyle(
-                                  decoration: TextDecoration.none,
-                                  fontSize: 11,
-                                  color: Colors.black38,
-                                ),
+                            ),
+                            Text(
+                              petList.petDesc,
+                              style: TextStyle(
+                                decoration: TextDecoration.none,
+                                fontSize: 11,
+                                color: Colors.black38,
                               ),
-                              Spacer(),
-                              Text(
-                                "₹ ${petList.amount}",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  decoration: TextDecoration.none,
-                                  fontWeight: FontWeight.w500,
-                                  color: AppColors.textColor,
-                                ),
+                            ),
+                            Spacer(),
+                            Text(
+                              "₹ ${petList.amount}",
+                              style: TextStyle(
+                                fontSize: 20,
+                                decoration: TextDecoration.none,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.textColor,
                               ),
-                              Spacer()
-                            ],
-                          ),
+                            ),
+                            Spacer()
+                          ],
                         ),
                       ),
                     )

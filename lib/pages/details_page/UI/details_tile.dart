@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pet_care/common/utils/colors.dart';
 import 'package:pet_care/common/utils/constants.dart';
 import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
-import 'package:pet_care/pages/home_page/bloc/home_bloc.dart';
 
 class Details_Tile extends StatelessWidget {
   final PetDetailsModel petList;
@@ -38,7 +37,7 @@ class Details_Tile extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.only(top: 30, left: 20),
+                      padding: EdgeInsets.only(top: AppConstants.screenWidth * 0.1, left: AppConstants.screenWidth * 0.1),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +65,7 @@ class Details_Tile extends StatelessWidget {
                   Container(
                     width: AppConstants.screenWidth * 0.25,
                     height: AppConstants.screenHeight,
-                    margin: EdgeInsets.only(right: 15),
+                    margin: EdgeInsets.only(right: AppConstants.screenWidth * 0.1),
                     alignment: Alignment.center,
                     child: Center(
                       child: Text(
@@ -85,8 +84,8 @@ class Details_Tile extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 10,
-          right: 15,
+          top: AppConstants.screenWidth * 0.03,
+          right: AppConstants.screenWidth * 0.04,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(

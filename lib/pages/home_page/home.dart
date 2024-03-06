@@ -97,7 +97,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             listenWhen: (previous, current) => current is HomeActionState,
             buildWhen: (previous, current) => current is! HomeActionState,
             listener: (context, state) {
-              print(state);
               if (state is GoToDetailsState) {
                 Navigator.push(
                   context,
@@ -155,7 +154,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
-  Expanded _PetDetailsList(List<PetDetailsModel> petDetailsLists) {
+  Widget _PetDetailsList(List<PetDetailsModel> petDetailsLists) {
     return Expanded(
       child: ListView.builder(
         shrinkWrap: false,
