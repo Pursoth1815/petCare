@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pet_care/common/app_theme.dart';
-import 'package:pet_care/common/utils/constants.dart';
-import 'package:pet_care/pages/splash_screen/bloc/splash_bloc.dart';
-import 'package:pet_care/pages/splash_screen/splash.dart';
+import 'package:pet_care/core/common/theme/app_theme.dart';
+import 'package:pet_care/core/constants/constants.dart';
+import 'package:pet_care/features/splash_screen/presentation/bloc/splash_bloc.dart';
+import 'package:pet_care/features/splash_screen/presentation/splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

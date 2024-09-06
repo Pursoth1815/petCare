@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care/common/utils/colors.dart';
+import 'package:pet_care/core/constants/colors.dart';
 
 class AppTheme {
   static ThemeData lighThemeData = ThemeData(
@@ -13,9 +13,9 @@ class AppTheme {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         animationDuration: Duration(milliseconds: 500),
-        elevation: MaterialStateProperty.all(3),
-        padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
-        backgroundColor: MaterialStateProperty.all(AppColors.white),
+        elevation: WidgetStateProperty.all(3),
+        padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+        backgroundColor: WidgetStateProperty.all(AppColors.white),
       ),
     ),
   );

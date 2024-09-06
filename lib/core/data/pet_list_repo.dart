@@ -1,5 +1,5 @@
-import 'package:pet_care/common/utils/image_string.dart';
-import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
+import 'package:pet_care/core/constants/image_string.dart';
+import 'package:pet_care/features/details_page/data/models/pet_details_model.dart';
 
 class PetListRepo {
   PetListRepo._privateConstructor();

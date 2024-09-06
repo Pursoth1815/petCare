@@ -4,10 +4,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:pet_care/data/pet_category_repo.dart';
-import 'package:pet_care/data/pet_list_repo.dart';
-import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
-import 'package:pet_care/pages/details_page/models/pet_list_model.dart';
+import 'package:pet_care/core/data/pet_category_repo.dart';
+import 'package:pet_care/core/data/pet_list_repo.dart';
+import 'package:pet_care/features/details_page/data/models/pet_details_model.dart';
+import 'package:pet_care/features/details_page/data/models/pet_list_model.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';

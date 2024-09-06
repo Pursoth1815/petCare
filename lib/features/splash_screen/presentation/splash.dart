@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_care/common/utils/app_const.dart';
-import 'package:pet_care/common/utils/colors.dart';
-import 'package:pet_care/common/utils/constants.dart';
-import 'package:pet_care/common/utils/image_string.dart';
-import 'package:pet_care/common/widgets/black_hole_clipper.dart';
-import 'package:pet_care/common/widgets/custom_page_transition.dart';
-import 'package:pet_care/pages/home_page/home.dart';
-import 'package:pet_care/pages/splash_screen/bloc/splash_bloc.dart';
+import 'package:pet_care/core/common/widgets/black_hole_clipper.dart';
+import 'package:pet_care/core/common/widgets/custom_page_transition.dart';
+import 'package:pet_care/core/constants/colors.dart';
+import 'package:pet_care/core/constants/constants.dart';
+import 'package:pet_care/core/constants/image_string.dart';
+import 'package:pet_care/features/home_page/presentation/home.dart';
+import 'package:pet_care/features/splash_screen/presentation/bloc/splash_bloc.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

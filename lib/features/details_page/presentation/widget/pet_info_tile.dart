@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care/common/utils/colors.dart';
+import 'package:pet_care/core/constants/colors.dart';
 
 class PetInfo extends StatelessWidget {
   final String title;

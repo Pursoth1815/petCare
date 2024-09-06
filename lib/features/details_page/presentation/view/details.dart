@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care/common/utils/app_const.dart';
-import 'package:pet_care/common/utils/colors.dart';
-import 'package:pet_care/common/utils/constants.dart';
-import 'package:pet_care/pages/details_page/UI/details_tile.dart';
+import 'package:pet_care/core/constants/colors.dart';
+import 'package:pet_care/core/constants/constants.dart';
+import 'package:pet_care/features/details_page/data/models/pet_details_model.dart';
+import 'package:pet_care/features/details_page/presentation/widget/details_tile.dart';
 import 'package:pet_care/pages/details_page/UI/pet_info_tile.dart';
-import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
 
 class PetDetails extends StatefulWidget {
   final PetDetailsModel petLists;
@@ -192,7 +192,7 @@ class _PetDetailsState extends State<PetDetails> with TickerProviderStateMixin {
           child: ElevatedButton(
             onPressed: null,
             style: ButtonStyle(
-              backgroundColor: MaterialStatePropertyAll(AppColors.Pink),
+              backgroundColor: WidgetStatePropertyAll(AppColors.Pink),
             ),
             child: Text(
               AppConst.adoption.toUpperCase(),

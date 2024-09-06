@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pet_care/common/utils/app_const.dart';
-import 'package:pet_care/common/utils/colors.dart';
-import 'package:pet_care/common/utils/constants.dart';
-import 'package:pet_care/common/utils/image_string.dart';
-import 'package:pet_care/pages/details_page/details.dart';
-import 'package:pet_care/pages/details_page/models/pet_details_model.dart';
-import 'package:pet_care/pages/details_page/models/pet_list_model.dart';
-import 'package:pet_care/pages/home_page/UI/pet_details_tile.dart';
-import 'package:pet_care/pages/home_page/bloc/home_bloc.dart';
-import 'package:pet_care/pages/home_page/UI/category_tile.dart';
+import 'package:pet_care/core/constants/colors.dart';
+import 'package:pet_care/core/constants/constants.dart';
+import 'package:pet_care/core/constants/image_string.dart';
+import 'package:pet_care/features/details_page/data/models/pet_details_model.dart';
+import 'package:pet_care/features/details_page/data/models/pet_list_model.dart';
+import 'package:pet_care/features/details_page/presentation/view/details.dart';
+import 'package:pet_care/features/home_page/presentation/bloc/home_bloc.dart';
+import 'package:pet_care/features/home_page/presentation/widgets/category_tile.dart';
+import 'package:pet_care/features/home_page/presentation/widgets/pet_details_tile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

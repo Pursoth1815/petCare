@@ -1,4 +1,4 @@
-import 'package:pet_care/common/utils/image_string.dart';
+import 'package:pet_care/core/constants/image_string.dart';
 
 class PetCategoryRepo {
   PetCategoryRepo._();
